@@ -27,176 +27,169 @@ $conn->close();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Admin Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 
-  :root {
-    /* Leather & Ink Light Theme Vars */
-    --primary-color: #8B5E3C;
-    --primary-color-hover: #6E4A2C;
-    --text-color-dark: #3C2F2F;
-    --card-bg-light: #fdf6e3;
-    --shadow-color-light: rgba(139, 94, 60, 0.2);
-    --btn-bg-light: #8B5E3C;
-    --btn-hover-bg-light: #6E4A2C;
-    --table-head-bg-light: #e9dcc6;
-  }
+    :root {
+      --primary-color: #8B5E3C;
+      --primary-color-hover: #6E4A2C;
+      --text-color-dark: #3C2F2F;
+      --card-bg-light: #fdf6e3;
+      --shadow-color-light: rgba(139, 94, 60, 0.2);
+      --btn-bg-light: #8B5E3C;
+      --btn-hover-bg-light: #6E4A2C;
+      --table-head-bg-light: #e9dcc6;
+    }
 
-  body {
-    padding-top: 70px;
-    font-family: 'Roboto Slab', serif;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    min-height: 100vh;
+    body {
+      padding-top: 70px;
+      font-family: 'Roboto Slab', serif;
+      background-color: var(--card-bg-light);
+      color: var(--text-color-dark);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      min-height: 100vh;
+    }
 
-    /* Default Light Theme */
-    background-color: var(--card-bg-light);
-    color: var(--text-color-dark);
-  }
+    body.dark-mode {
+      --primary-color: #D4B483;
+      --primary-color-hover: #BBA15D;
+      --text-color-dark: #E6E1D3;
+      --card-bg-dark: #1B263B;
+      --shadow-color-dark: rgba(212, 180, 131, 0.6);
+      --btn-bg-dark: #B38B47;
+      --btn-hover-bg-dark: #8A6B32;
+      --table-head-bg-dark: #324A66;
 
-  body.dark-mode {
-    /* Deep Navy & Brass Dark Theme Vars */
-    --primary-color: #D4B483;
-    --primary-color-hover: #BBA15D;
-    --text-color-dark: #E6E1D3;
-    --card-bg-dark: #1B263B;
-    --shadow-color-dark: rgba(212, 180, 131, 0.6);
-    --btn-bg-dark: #B38B47;
-    --btn-hover-bg-dark: #8A6B32;
-    --table-head-bg-dark: #324A66;
+      background: linear-gradient(135deg, #1B263B, #121C2F);
+      color: var(--text-color-dark);
+    }
 
-    background: linear-gradient(135deg, #1B263B, #121C2F);
-    color: var(--text-color-dark);
-  }
+    h2, .section-title {
+      color: var(--primary-color);
+      font-weight: 700;
+    }
 
-  /* Use CSS variables for colors */
-  h2, .section-title {
-    color: var(--primary-color);
-    font-weight: 700;
-  }
+    .custom-summary-card {
+      background-color: var(--card-bg-light);
+      color: var(--text-color-dark);
+      box-shadow: 0 4px 15px var(--shadow-color-light);
+      border: none;
+      transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    }
 
-  .summary-cards .card {
-    background-color: var(--card-bg-light);
-    color: var(--text-color-dark);
-    box-shadow: 0 4px 15px var(--shadow-color-light);
-    border: none;
-    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-    cursor: default;
-  }
-  .summary-cards .card:hover {
-    background-color: var(--primary-color-hover);
-    color: white;
-    box-shadow: 0 6px 25px var(--shadow-color-light);
-  }
+    .custom-summary-card:hover {
+      background-color: var(--primary-color-hover);
+      color: white;
+      box-shadow: 0 6px 25px var(--shadow-color-light);
+    }
 
-  body.dark-mode .summary-cards .card {
-    background-color: var(--card-bg-dark);
-    color: var(--text-color-dark);
-    box-shadow: 0 4px 15px var(--shadow-color-dark);
-  }
-  body.dark-mode .summary-cards .card:hover {
-    background-color: var(--btn-hover-bg-dark);
-    color: white;
-    box-shadow: 0 6px 25px var(--shadow-color-dark);
-  }
+    body.dark-mode .custom-summary-card {
+      background-color: var(--card-bg-dark);
+      color: var(--text-color-dark);
+      box-shadow: 0 4px 15px var(--shadow-color-dark);
+    }
 
-  .summary-cards .card-body {
-    text-align: center;
-  }
+    body.dark-mode .custom-summary-card:hover {
+      background-color: var(--btn-hover-bg-dark);
+      color: white;
+      box-shadow: 0 6px 25px var(--shadow-color-dark);
+    }
 
-  .summary-cards i {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-  }
+    .custom-summary-card .card-body {
+      text-align: center;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
-  .summary-cards h6 {
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-  }
+    .summary-cards i {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
 
-  .summary-cards p {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin: 0;
-  }
+    .summary-cards h6 {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
 
-  table {
-    background-color: var(--card-bg-light);
-    color: var(--text-color-dark);
-    border-radius: 0.8rem;
-    box-shadow: 0 4px 15px var(--shadow-color-light);
-    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-  }
+    .summary-cards p {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+    }
 
-  table thead {
-    background-color: var(--table-head-bg-light);
-    color: var(--text-color-dark);
-  }
+    table {
+      background-color: var(--card-bg-light);
+      color: var(--text-color-dark);
+      border-radius: 0.8rem;
+      box-shadow: 0 4px 15px var(--shadow-color-light);
+    }
 
-  table tbody tr:hover {
-    background-color: var(--primary-color-hover);
-    color: white;
-  }
+    table thead {
+      background-color: var(--table-head-bg-light);
+    }
 
-  body.dark-mode table {
-    background-color: var(--card-bg-dark);
-    color: var(--text-color-dark);
-    box-shadow: 0 4px 15px var(--shadow-color-dark);
-  }
+    table tbody tr:hover {
+      background-color: var(--primary-color-hover);
+      color: white;
+    }
 
-  body.dark-mode table thead {
-    background-color: var(--table-head-bg-dark);
-    color: var(--text-color-dark);
-  }
+    body.dark-mode table {
+      background-color: var(--card-bg-dark);
+      color: var(--text-color-dark);
+      box-shadow: 0 4px 15px var(--shadow-color-dark);
+    }
 
-  body.dark-mode table tbody tr:hover {
-    background-color: var(--btn-hover-bg-dark);
-    color: white;
-  }
+    body.dark-mode table thead {
+      background-color: var(--table-head-bg-dark);
+    }
 
-  .container {
-    max-width: 1100px;
-  }
+    body.dark-mode table tbody tr:hover {
+      background-color: var(--btn-hover-bg-dark);
+      color: white;
+    }
 
-  /* Dark/light mode toggle button */
-  #darkModeToggle {
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    z-index: 1050;
-    background-color: var(--btn-bg-light);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    font-size: 1.5rem;
-    box-shadow: 0 0 10px var(--btn-bg-light);
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  }
+    .container {
+      max-width: 1100px;
+    }
 
-  #darkModeToggle:hover {
-    background-color: var(--btn-hover-bg-light);
-    box-shadow: 0 0 15px var(--btn-hover-bg-light);
-  }
+    #darkModeToggle {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      z-index: 1050;
+      background-color: var(--btn-bg-light);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 1.5rem;
+      box-shadow: 0 0 10px var(--btn-bg-light);
+      cursor: pointer;
+    }
 
-  body.dark-mode #darkModeToggle {
-    background-color: var(--btn-bg-dark);
-    box-shadow: 0 0 10px var(--btn-bg-dark);
-  }
+    #darkModeToggle:hover {
+      background-color: var(--btn-hover-bg-light);
+    }
 
-  body.dark-mode #darkModeToggle:hover {
-    background-color: var(--btn-hover-bg-dark);
-    box-shadow: 0 0 15px var(--btn-hover-bg-dark);
-  }
-</style>
+    body.dark-mode #darkModeToggle {
+      background-color: var(--btn-bg-dark);
+      box-shadow: 0 0 10px var(--btn-bg-dark);
+    }
+
+    body.dark-mode #darkModeToggle:hover {
+      background-color: var(--btn-hover-bg-dark);
+    }
+  </style>
 </head>
 <body>
 <?php include 'navbar.php'; ?>
@@ -208,16 +201,16 @@ $conn->close();
   <div class="row g-3 summary-cards mb-5">
     <?php
       $summary = [
-        ['label' => 'Suppliers', 'count' => $supplierCount, 'color' => 'primary', 'icon' => 'bi-truck'],
-        ['label' => 'Customers', 'count' => $customerCount, 'color' => 'success', 'icon' => 'bi-people'],
-        ['label' => 'Stores', 'count' => $storeCount, 'color' => 'info', 'icon' => 'bi-shop'],
-        ['label' => 'Delivery Persons', 'count' => $deliveryPersonCount, 'color' => 'warning', 'icon' => 'bi-person-bounding-box'],
-        ['label' => 'Books', 'count' => $bookCount, 'color' => 'secondary', 'icon' => 'bi-book'],
+        ['label' => 'Suppliers', 'count' => $supplierCount, 'icon' => 'bi-truck'],
+        ['label' => 'Customers', 'count' => $customerCount, 'icon' => 'bi-people'],
+        ['label' => 'Stores', 'count' => $storeCount, 'icon' => 'bi-shop'],
+        ['label' => 'Delivery Persons', 'count' => $deliveryPersonCount, 'icon' => 'bi-person-bounding-box'],
+        ['label' => 'Books', 'count' => $bookCount, 'icon' => 'bi-book'],
       ];
 
       foreach ($summary as $item): ?>
-        <div class="col-md-2">
-          <div class="card text-white bg-<?= $item['color'] ?>">
+        <div class="col-6 col-md-4 col-lg-2 d-flex">
+          <div class="card custom-summary-card w-100">
             <div class="card-body">
               <i class="bi <?= $item['icon'] ?>"></i>
               <h6><?= $item['label'] ?></h6>
@@ -288,8 +281,9 @@ $conn->close();
       </table>
     </div>
   </div>
-    <!-- Recent Books -->
-  <div>
+
+  <!-- Recent Books -->
+  <div class="mb-4">
     <h4 class="section-title">📚 Recent Books</h4>
     <div class="table-responsive">
       <table class="table table-striped table-hover align-middle rounded-4">
@@ -308,10 +302,9 @@ $conn->close();
       </table>
     </div>
   </div>
-</div>
 
   <!-- Recent Delivery Persons -->
-  <div>
+  <div class="mb-4">
     <h4 class="section-title">🚚 Recent Delivery Persons</h4>
     <div class="table-responsive">
       <table class="table table-striped table-hover align-middle rounded-4">
@@ -334,6 +327,7 @@ $conn->close();
 
 <footer class="text-center mt-5">
   <p>&copy; <?= date("Y") ?> Inkventory. All rights reserved.</p>
+</footer>
 
 <!-- Dark/Light Mode Toggle Button -->
 <button id="darkModeToggle" aria-label="Toggle dark/light mode" title="Toggle Dark/Light Mode">
@@ -350,7 +344,6 @@ $conn->close();
     icon.className = isLight ? 'bi bi-moon-fill' : 'bi bi-brightness-high-fill';
   }
 
-  // Initialize mode from localStorage
   if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark-mode');
     updateIcon(false);
