@@ -21,7 +21,6 @@ if (!$admin || $admin['role'] !== 'super') {
 
 include 'navbar.php';
 
-// Fetch stores
 $store_ids = [];
 $store_id_to_name = [];
 $store_stmt = $conn->prepare("SELECT store_id, name FROM store ORDER BY store_id");
@@ -33,13 +32,11 @@ while ($store = $store_result->fetch_assoc()) {
 }
 $store_stmt->close();
 
-// Get audit_id and validate
 $audit_id = intval($_GET['audit_id'] ?? 0);
 if (!$audit_id) {
     die("Invalid audit ID.");
 }
 
-// Fetch audit log
 $result = $conn->prepare("SELECT * FROM audit_logs WHERE audit_id = ?");
 $result->bind_param("i", $audit_id);
 $result->execute();
@@ -53,7 +50,6 @@ if (!$audit_log) {
 $store_of_audit_id = intval($audit_log['store_of_audit']);
 $store_of_audit = $store_id_to_name[$store_of_audit_id] ?? '';
 
-// Load books for this store + previously counted stocks
 $stmt = $conn->prepare(
     "SELECT 
         b.book_id, b.title, sb.stock AS actual_stock, 
@@ -69,7 +65,6 @@ $stmt->close();
 
 $message = '';
 
-// Handle form submission to update
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['audit_id'])) {
     $store_of_audit_name = $_POST['store_of_audit'] ?? '';
     $auditor_name = trim($_POST['auditor_name'] ?? '');
@@ -118,11 +113,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['audit_id'])) {
         if ($stmt->execute()) {
             $stmt->close();
 
-            // Upsert audit_stock rows for counted stocks
             foreach ($_POST['counted_stock'] as $book_id => $counted) {
                 $book_id_int = intval($book_id);
 
-                // Check existence
                 $check = $conn->prepare("SELECT COUNT(*) AS cnt FROM audit_stock WHERE audit_id = ? AND book_id = ?");
                 $check->bind_param("ii", $audit_id, $book_id_int);
                 $check->execute();
@@ -147,7 +140,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['audit_id'])) {
                 }
             }
 
-            // Reload books for updated store after change
             $store_of_audit_id = $store_id;
             $store_of_audit = $store_of_audit_name;
             $stmt = $conn->prepare(
@@ -257,7 +249,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['audit_id'])) {
       background-color: var(--btn-hover-bg-dark);
     }
 
-    /* Toggle Button */
     #darkModeToggle {
       position: fixed;
       bottom: 1rem;
@@ -374,7 +365,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['audit_id'])) {
 </div>
 
 <script>
-// Progress bar update logic
 function updateProgress() {
     const inputs = document.querySelectorAll('.counted-stock-input');
     let matchedCount = 0;
