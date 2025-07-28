@@ -39,7 +39,7 @@ if (isset($_SESSION['admin'])) {
   }
 
   nav.navbar .navbar-toggler-icon {
-    filter: invert(80%) sepia(70%) saturate(500%) hue-rotate(35deg) brightness(100%) contrast(90%);
+    filter:70%) saturate(500%) hue-rotate(35deg) brightness(100%) contrast(90%);
   }
 
   nav.navbar .dropdown-menu {
@@ -140,6 +140,21 @@ if (isset($_SESSION['admin'])) {
         <li class="nav-item">
           <a class="nav-link" href="delivery_person.php">Delivery Personnel</a>
         </li>
+
+        <!-- Audits Dropdown - Only visible to super admins -->
+        <?php if (isset($admin_role) && $admin_role === 'super'): ?>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="auditsDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Audits
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="auditsDropdown">
+              <li><a class="dropdown-item" href="view_audit_logs.php">View Audits</a></li>
+              <li><a class="dropdown-item" href="add_audit.php">Add Audit</a></li>
+            </ul>
+          </li>
+        <?php endif; ?>
+
       </ul>
 
       <ul class="navbar-nav align-items-center">
