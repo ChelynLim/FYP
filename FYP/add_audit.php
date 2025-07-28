@@ -19,9 +19,8 @@ if (!$admin || $admin['role'] !== 'super') {
     exit();
 }
 
-// Fetch stores from DB
-$store_ids = []; // name => id
-$store_id_to_name = []; // id => name
+$store_ids = []; 
+$store_id_to_name = []; 
 $store_stmt = $conn->prepare("SELECT store_id, name FROM store ORDER BY store_id");
 $store_stmt->execute();
 $store_result = $store_stmt->get_result();
@@ -40,7 +39,6 @@ $show_books_table = false;
 $auditor_name = '';
 $audit_date = date('Y-m-d');
 
-// Load books when store selected (but audit form not yet submitted)
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['store_of_audit']) && !isset($_POST['audit_submit'])) {
     $store_of_audit = $_POST['store_of_audit'];
     if (isset($store_ids[$store_of_audit])) {
@@ -76,7 +74,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['audit_submit'])) {
     } else {
         $selected_store_id = $store_ids[$store_of_audit];
 
-        // Fetch actual stocks
         $stmt = $conn->prepare(
             "SELECT b.book_id, b.title, sb.stock 
              FROM book b 
@@ -121,7 +118,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['audit_submit'])) {
                 $ins->execute();
                 $ins->close();
             }
-            // Redirect to audit logs after successful insert
             header("Location: view_audit_logs.php");
             exit();
         } else {
@@ -130,7 +126,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['audit_submit'])) {
     }
 }
 
-// Set values for form input defaults if not set yet
 if (empty($auditor_name)) $auditor_name = $admin_username;
 if (empty($audit_date)) $audit_date = date('Y-m-d');
 
@@ -235,7 +230,6 @@ include 'navbar.php';
       border-color: #3e7153;
     }
 
-    /* Toggle Button */
     #darkModeToggle {
       position: fixed;
       bottom: 1rem;
@@ -356,7 +350,6 @@ include 'navbar.php';
 </div>
 
 <script>
-// Calculate and update progress bar
 function updateProgress() {
     const inputs = document.querySelectorAll('.counted-stock-input');
     let matchedCount = 0;
@@ -373,7 +366,6 @@ function updateProgress() {
     progressBar.style.width = percent + '%';
     progressBar.textContent = percent + '%';
 
-    // Color changes if 100% completion
     if (percent === 100) {
         progressBar.classList.remove('bg-warning');
         progressBar.classList.add('bg-success');
@@ -383,12 +375,10 @@ function updateProgress() {
     }
 }
 
-// Attach event listeners to stock inputs
 document.querySelectorAll('.counted-stock-input').forEach(input => {
     input.addEventListener('input', updateProgress);
 });
 
-// Initial update on page load if inputs exist
 updateProgress();
 </script>
 
