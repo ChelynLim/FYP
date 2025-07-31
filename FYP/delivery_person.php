@@ -111,6 +111,12 @@ if ($result && $result->num_rows > 0) {
       --btn-bg-dark: #B38B47;
       --btn-hover-bg-dark: #8A6B32;
       --modal-bg-dark: #2A3A62;
+
+      /* Danger colors for Delete */
+      --danger-color-light: #A83232; /* deep leather red */
+      --danger-hover-light: #7F2626;
+      --danger-color-dark: #D25A5A;
+      --danger-hover-dark: #A44242;
     }
 
     body {
@@ -172,20 +178,23 @@ if ($result && $result->num_rows > 0) {
       color: var(--background-dark);
     }
 
-    .btn-secondary {
-      background-color: #777;
+    .btn-danger {
+      background-color: var(--danger-color-light);
       border: none;
+      color: var(--background-light);
       transition: background-color 0.3s ease;
-      color: white;
     }
-    .btn-secondary:hover {
-      background-color: #555;
+    .btn-danger:hover {
+      background-color: var(--danger-hover-light);
+      color: var(--background-light);
     }
-    body.dark-mode .btn-secondary {
-      background-color: #444;
+    body.dark-mode .btn-danger {
+      background-color: var(--danger-color-dark);
+      color: var(--background-dark);
     }
-    body.dark-mode .btn-secondary:hover {
-      background-color: #222;
+    body.dark-mode .btn-danger:hover {
+      background-color: var(--danger-hover-dark);
+      color: var(--background-dark);
     }
 
     .form-control {
@@ -333,7 +342,7 @@ if ($result && $result->num_rows > 0) {
               </button>
               <form method="POST" class="d-inline" onsubmit="return confirm('Delete this person?');">
                 <input type="hidden" name="dp_id" value="<?= $person['delivery_person_id'] ?>">
-                <button type="submit" name="delete_delivery_person" class="btn btn-secondary btn-sm">
+                <button type="submit" name="delete_delivery_person" class="btn btn-danger btn-sm">
                   <i class="bi bi-trash"></i> Delete
                 </button>
               </form>

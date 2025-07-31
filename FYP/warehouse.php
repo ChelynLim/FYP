@@ -464,6 +464,13 @@ $conn->close();
       background-color: var(--primary-color-hover);
       box-shadow: 0 0 15px var(--primary-color-hover);
     }
+
+    /* Button & Select Consistent Height & Alignment */
+    td > div.d-flex > form > .btn,
+    td > div.d-flex > form > select.form-select {
+      height: 30px;
+      line-height: 1.2;
+    }
     </style>
 </head>
 <body>
@@ -509,24 +516,25 @@ $conn->close();
                 <td><?= htmlspecialchars($d['email'] ?? '-') ?></td>
                 <td><?= ucfirst($d['status']) ?></td>
                 <td>
-                    <form method="POST" class="d-inline">
-                        <input type="hidden" name="delivery_id" value="<?= $d['delivery_id'] ?>">
-                        <!-- Complete button enabled unless status already delivered -->
-                        <button type="submit" name="mark_complete" class="btn btn-sm btn-success" <?= $d['status'] === 'delivered' ? 'disabled' : '' ?> onclick="return confirm('Mark this delivery as complete?')">Complete</button>
-                    </form>
-                    <form method="POST" class="d-inline">
-                        <input type="hidden" name="delivery_id" value="<?= $d['delivery_id'] ?>">
-                        <select name="new_status" class="form-select form-select-sm d-inline w-auto">
-                            <option value="pending" <?= $d['status'] === 'pending' ? 'selected' : '' ?>>Pending</option>
-                            <option value="delivered" <?= $d['status'] === 'delivered' ? 'selected' : '' ?>>Delivered</option>
-                            <option value="failed" <?= $d['status'] === 'failed' ? 'selected' : '' ?>>Failed</option>
-                        </select>
-                        <button type="submit" name="update_status" class="btn btn-sm btn-primary">Update</button>
-                    </form>
-                    <form method="POST" class="d-inline" onsubmit="return confirm('Delete this delivery and revert stock?');">
-                        <input type="hidden" name="delivery_id" value="<?= $d['delivery_id'] ?>">
-                        <button type="submit" name="delete_delivery" class="btn btn-sm btn-danger">Delete</button>
-                    </form>
+                    <div class="d-flex flex-column gap-2 align-items-start">
+                        <!-- Complete button -->
+                        <form method="POST" class="m-0 w-100">
+                            <input type="hidden" name="delivery_id" value="<?= $d['delivery_id'] ?>">
+                            <button type="submit" name="mark_complete" class="btn btn-sm btn-success w-100" <?= $d['status'] === 'delivered' ? 'disabled' : '' ?> onclick="return confirm('Mark this delivery as complete?')">Complete</button>
+                        </form>
+
+                        <!-- Dropdown + Update + Delete buttons -->
+                        <form method="POST" class="m-0 w-100 d-flex flex-column gap-1">
+                            <input type="hidden" name="delivery_id" value="<?= $d['delivery_id'] ?>">
+                            <select name="new_status" class="form-select form-select-sm" style="min-width: 110px;">
+                                <option value="pending" <?= $d['status'] === 'pending' ? 'selected' : '' ?>>Pending</option>
+                                <option value="delivered" <?= $d['status'] === 'delivered' ? 'selected' : '' ?>>Delivered</option>
+                                <option value="failed" <?= $d['status'] === 'failed' ? 'selected' : '' ?>>Failed</option>
+                            </select>
+                            <button type="submit" name="update_status" class="btn btn-sm btn-primary w-100">Update</button>
+                            <button type="submit" name="delete_delivery" class="btn btn-sm btn-danger w-100" onclick="return confirm('Delete this delivery and revert stock?');">Delete</button>
+                        </form>
+                    </div>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -553,16 +561,18 @@ $conn->close();
                 <td><?= htmlspecialchars($s['book']) ?></td>
                 <td><?= $s['stock'] ?></td>
                 <td>
+                    <div class="d-flex align-items-center gap-2">
                     <?php if ($s['delivery_count'] > 0): ?>
                         <button class="btn btn-sm btn-secondary" disabled data-bs-toggle="tooltip" data-bs-placement="top" title="Cannot delete because deliveries exist. Please delete the deliveries first.">In Use</button>
                     <?php else: ?>
-                        <form method="POST" onsubmit="return confirm('Delete this book from store stock?');" class="d-inline">
+                        <form method="POST" onsubmit="return confirm('Delete this book from store stock?');" class="m-0">
                             <input type="hidden" name="delete_store_stock" value="1">
                             <input type="hidden" name="store_name" value="<?= htmlspecialchars($s['store']) ?>">
                             <input type="hidden" name="book_title" value="<?= htmlspecialchars($s['book']) ?>">
                             <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                         </form>
                     <?php endif; ?>
+                    </div>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -591,7 +601,7 @@ $conn->close();
     </table>
 </div>
 
-  <footer class="text-center mt-5">
+<footer class="text-center mt-5">
   <p>&copy; <?= date('Y'); ?> Inkventory. All rights reserved.</p>
 
 <!-- Dark Mode Toggle Button -->
@@ -631,6 +641,6 @@ toggle.addEventListener('click', () => {
     updateIcon(isLight);
 });
 </script>
-
+</footer>
 </body>
 </html>

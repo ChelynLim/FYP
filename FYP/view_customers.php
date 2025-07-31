@@ -19,195 +19,212 @@ include 'navbar.php';
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 
-    :root {
-      --primary-color: #8B5E3C;
-      --primary-color-hover: #6E4A2C;
-      --text-color-dark: #3C2F2F;
-      --card-bg-light: #fdf6e3;
-      --shadow-color-light: rgba(139, 94, 60, 0.2);
-      --btn-bg-light: #8B5E3C;
-      --btn-hover-bg-light: #6E4A2C;
-      --table-head-bg-light: #e9dcc6;
+:root {
+  --primary-color: #8B5E3C;
+  --primary-color-hover: #6E4A2C;
+  --text-color-dark: #3C2F2F;
+  --card-bg-light: #fdf6e3;
+  --shadow-color-light: rgba(139, 94, 60, 0.2);
+  --btn-bg-light: #B38B47;          /* Updated primary btn background */
+  --btn-hover-bg-light: #8A6B32;    /* Updated primary btn hover */
+  --table-head-bg-light: #e9dcc6;
 
-      --primary-color-dark: #D4B483;
-      --primary-color-hover-dark: #BBA15D;
-      --text-color-light: #E6E1D3;
-      --card-bg-dark: #1B263B;
-      --shadow-color-dark: rgba(212, 180, 131, 0.6);
-      --btn-bg-dark: #B38B47;
-      --btn-hover-bg-dark: #8A6B32;
-      --table-head-bg-dark: #324A66;
-    }
+  --primary-color-dark: #D4B483;
+  --primary-color-hover-dark: #BBA15D;
+  --text-color-light: #E6E1D3;
+  --card-bg-dark: #1B263B;
+  --shadow-color-dark: rgba(212, 180, 131, 0.6);
+  --btn-bg-dark: #D4B483;           /* Dark mode primary btn bg */
+  --btn-hover-bg-dark: #BBA15D;     /* Dark mode primary btn hover */
+  --table-head-bg-dark: #324A66;
 
-    body {
-      font-family: 'Roboto Slab', serif;
-      background-color: var(--card-bg-light);
-      color: var(--text-color-dark);
-      transition: background-color 0.3s ease, color 0.3s ease;
-      padding-top: 70px;
-      min-height: 100vh;
-    }
+  --btn-danger-bg-light: #C5725B;   /* Danger btn bg */
+  --btn-danger-hover-bg-light: #9F4E3C; /* Danger btn hover */
 
-    body.dark-mode {
-      background-color: var(--card-bg-dark);
-      color: var(--text-color-light);
-    }
+  --btn-danger-bg-dark: #A3523A;
+  --btn-danger-hover-bg-dark: #823B27;
+}
 
-    h2 {
-      text-align: center;
-      margin-bottom: 2rem;
-      color: var(--primary-color);
-      font-weight: 700;
-    }
+body {
+  font-family: 'Roboto Slab', serif;
+  background-color: var(--card-bg-light);
+  color: var(--text-color-dark);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  padding-top: 70px;
+  min-height: 100vh;
+}
 
-    body.dark-mode h2 {
-      color: var(--primary-color-dark);
-    }
+body.dark-mode {
+  background-color: var(--card-bg-dark);
+  color: var(--text-color-light);
+}
 
-    .card {
-      background-color: var(--card-bg-light);
-      border-radius: 1rem;
-      box-shadow: 0 4px 15px var(--shadow-color-light);
-      padding: 1rem;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    }
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+  font-weight: 700;
+}
 
-    body.dark-mode .card {
-      background-color: var(--card-bg-dark);
-      box-shadow: 0 4px 15px var(--shadow-color-dark);
-    }
+body.dark-mode h2 {
+  color: var(--primary-color-dark);
+}
 
-    table {
-      background-color: transparent;
-      color: inherit;
-    }
+.card {
+  background-color: var(--card-bg-light);
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px var(--shadow-color-light);
+  padding: 1rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-    table thead {
-      background-color: var(--table-head-bg-light);
-      color: var(--text-color-dark);
-    }
+body.dark-mode .card {
+  background-color: var(--card-bg-dark);
+  box-shadow: 0 4px 15px var(--shadow-color-dark);
+}
 
-    tbody tr:hover {
-      background-color: var(--primary-color-hover);
-      color: white;
-      cursor: pointer;
-    }
+table {
+  background-color: transparent;
+  color: inherit;
+}
 
-    body.dark-mode table thead {
-      background-color: var(--table-head-bg-dark);
-      color: var(--text-color-light);
-    }
+table thead {
+  background-color: var(--table-head-bg-light);
+  color: var(--text-color-dark);
+}
 
-    body.dark-mode tbody tr:hover {
-      background-color: var(--btn-hover-bg-dark);
-      color: white;
-    }
+tbody tr:hover {
+  background-color: var(--primary-color-hover);
+  color: white;
+  cursor: pointer;
+}
 
-    .form-control, .form-select {
-      border-radius: 0.5rem;
-    }
+body.dark-mode table thead {
+  background-color: var(--table-head-bg-dark);
+  color: var(--text-color-light);
+}
 
-    .btn-primary, .btn-success {
-      background-color: var(--btn-bg-light);
-      border: none;
-      transition: background-color 0.3s ease;
-    }
+body.dark-mode tbody tr:hover {
+  background-color: var(--btn-hover-bg-dark);
+  color: white;
+}
 
-    .btn-primary:hover, .btn-success:hover {
-      background-color: var(--btn-hover-bg-light);
-    }
+.form-control, .form-select {
+  border-radius: 0.5rem;
+}
 
-    body.dark-mode .btn-primary, body.dark-mode .btn-success {
-      background-color: var(--btn-bg-dark);
-    }
+/* Updated button styles for Leather & Ink theme */
 
-    body.dark-mode .btn-primary:hover, body.dark-mode .btn-success:hover {
-      background-color: var(--btn-hover-bg-dark);
-    }
+.btn-primary, .btn-success {
+  background-color: var(--btn-bg-light);
+  border: none;
+  transition: background-color 0.3s ease;
+  color: white;
+}
 
-    .btn-danger {
-      background-color: #A3523A;
-      border: none;
-      color: white;
-      transition: background-color 0.3s ease;
-    }
+.btn-primary:hover, .btn-success:hover {
+  background-color: var(--btn-hover-bg-light);
+  color: white;
+}
 
-    .btn-danger:hover {
-      background-color: #823B27;
-    }
+body.dark-mode .btn-primary, 
+body.dark-mode .btn-success {
+  background-color: var(--btn-bg-dark);
+  color: #1B263B; /* dark text for light button */
+}
 
-    body.dark-mode .btn-danger {
-      background-color: #C5725B;
-    }
+body.dark-mode .btn-primary:hover, 
+body.dark-mode .btn-success:hover {
+  background-color: var(--btn-hover-bg-dark);
+  color: #1B263B;
+}
 
-    body.dark-mode .btn-danger:hover {
-      background-color: #9F4E3C;
-    }
+.btn-danger {
+  background-color: var(--btn-danger-bg-light);
+  border: none;
+  color: white;
+  transition: background-color 0.3s ease;
+}
 
-    .pagination .page-link {
-      color: var(--primary-color);
-      background-color: transparent;
-      border: 1px solid var(--primary-color);
-    }
+.btn-danger:hover {
+  background-color: var(--btn-danger-hover-bg-light);
+  color: white;
+}
 
-    .pagination .page-link:hover {
-      background-color: var(--primary-color-hover);
-      color: white;
-    }
+body.dark-mode .btn-danger {
+  background-color: var(--btn-danger-bg-dark);
+  color: white;
+}
 
-    .pagination .page-item.active .page-link {
-      background-color: var(--primary-color);
-      color: white;
-      border-color: var(--primary-color);
-    }
+body.dark-mode .btn-danger:hover {
+  background-color: var(--btn-danger-hover-bg-dark);
+  color: white;
+}
 
-    body.dark-mode .pagination .page-link {
-      color: var(--primary-color-dark);
-      border-color: var(--primary-color-dark);
-    }
+.pagination .page-link {
+  color: var(--primary-color);
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+}
 
-    body.dark-mode .pagination .page-link:hover {
-      background-color: var(--primary-color-hover-dark);
-      color: white;
-    }
+.pagination .page-link:hover {
+  background-color: var(--primary-color-hover);
+  color: white;
+}
 
-    body.dark-mode .pagination .page-item.active .page-link {
-      background-color: var(--primary-color-dark);
-      color: white;
-    }
+.pagination .page-item.active .page-link {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
 
-    #darkModeToggle {
-      position: fixed;
-      bottom: 1rem;
-      right: 1rem;
-      z-index: 1050;
-      background-color: var(--btn-bg-light);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      font-size: 1.5rem;
-      box-shadow: 0 0 10px var(--btn-bg-light);
-      cursor: pointer;
-    }
+body.dark-mode .pagination .page-link {
+  color: var(--primary-color-dark);
+  border-color: var(--primary-color-dark);
+}
 
-    #darkModeToggle:hover {
-      background-color: var(--btn-hover-bg-light);
-      box-shadow: 0 0 15px var(--btn-hover-bg-light);
-    }
+body.dark-mode .pagination .page-link:hover {
+  background-color: var(--primary-color-hover-dark);
+  color: white;
+}
 
-    body.dark-mode #darkModeToggle {
-      background-color: var(--btn-bg-dark);
-      box-shadow: 0 0 10px var(--btn-bg-dark);
-    }
+body.dark-mode .pagination .page-item.active .page-link {
+  background-color: var(--primary-color-dark);
+  color: white;
+}
 
-    body.dark-mode #darkModeToggle:hover {
-      background-color: var(--btn-hover-bg-dark);
-      box-shadow: 0 0 15px var(--btn-hover-bg-dark);
-    }
+#darkModeToggle {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 1050;
+  background-color: var(--btn-bg-light);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.5rem;
+  box-shadow: 0 0 10px var(--btn-bg-light);
+  cursor: pointer;
+}
+
+#darkModeToggle:hover {
+  background-color: var(--btn-hover-bg-light);
+  box-shadow: 0 0 15px var(--btn-hover-bg-light);
+}
+
+body.dark-mode #darkModeToggle {
+  background-color: var(--btn-bg-dark);
+  box-shadow: 0 0 10px var(--btn-bg-dark);
+}
+
+body.dark-mode #darkModeToggle:hover {
+  background-color: var(--btn-hover-bg-dark);
+  box-shadow: 0 0 15px var(--btn-hover-bg-dark);
+}
   </style>
 </head>
 <body>
@@ -219,7 +236,8 @@ include 'navbar.php';
   <?php
     $search = $_GET['search'] ?? '';
     $sort = $_GET['sort'] ?? '';
-    $page = $_GET['page'] ?? 1;
+    $page = (int)($_GET['page'] ?? 1);
+    if ($page < 1) $page = 1;
     $limit = 10;
     $offset = ($page - 1) * $limit;
 
@@ -229,7 +247,9 @@ include 'navbar.php';
     $stmt->bind_param("ss", $searchTerm, $searchTerm);
     $stmt->execute();
     $totalRows = $stmt->get_result()->fetch_assoc()['total'];
-    $totalPages = ceil($totalRows / $limit);
+    $stmt->close();
+
+    $totalPages = max(1, ceil($totalRows / $limit));
 
     $query = "SELECT * FROM customers WHERE name LIKE ? OR email LIKE ?";
     if ($sort === 'name' || $sort === 'email') {
@@ -302,8 +322,9 @@ include 'navbar.php';
   </nav>
 </div>
 
-  <footer class="text-center mt-5">
+<footer class="text-center mt-5">
   <p>&copy; <?= date('Y'); ?> Inkventory. All rights reserved.</p>
+</footer>
 
 <!-- Toggle Button -->
 <button id="darkModeToggle" aria-label="Toggle dark/light mode" title="Toggle Dark/Light Mode">
@@ -336,3 +357,4 @@ include 'navbar.php';
 
 </body>
 </html>
+

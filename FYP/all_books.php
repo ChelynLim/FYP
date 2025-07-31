@@ -97,228 +97,259 @@ if ($result && $result->num_rows > 0) {
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 
-    :root {
-      /* Light theme colors */
-      --primary-color: #8B5E3C; /* leather brown */
-      --primary-color-hover: #6E4A2C;
-      --text-color-dark: #3C2F2F; /* dark brown text */
-      --background-light: #fdf6e3; /* parchment */
-      --card-bg-light: #fff8e7;
-      --shadow-color-light: rgba(139, 94, 60, 0.2);
-      --btn-bg-light: #8B5E3C;
-      --btn-hover-bg-light: #6E4A2C;
-      --modal-bg-light: #fff8e7;
+:root {
+  /* Light theme colors */
+  --primary-color: #8B5E3C; /* leather brown */
+  --primary-color-hover: #6E4A2C;
+  --text-color-dark: #3C2F2F; /* dark brown text */
+  --background-light: #fdf6e3; /* parchment */
+  --card-bg-light: #fff8e7;
+  --shadow-color-light: rgba(139, 94, 60, 0.2);
+  --btn-bg-light: #8B5E3C;
+  --btn-hover-bg-light: #6E4A2C;
+  --modal-bg-light: #fff8e7;
 
-      /* Dark theme colors */
-      --primary-color-dark: #D4B483;
-      --primary-color-hover-dark: #BBA15D;
-      --text-color-light: #E6E1D3;
-      --background-dark: #1B263B;
-      --card-bg-dark: #2A3A62;
-      --shadow-color-dark: rgba(212, 180, 131, 0.6);
-      --btn-bg-dark: #B38B47;
-      --btn-hover-bg-dark: #8A6B32;
-      --modal-bg-dark: #2A3A62;
-    }
+  /* Danger colors for Delete button */
+  --danger-color-light: #A83232; /* deep leather red */
+  --danger-hover-light: #7F2626;
 
-    body {
-      font-family: 'Roboto Slab', serif;
-      background-color: var(--background-light);
-      color: var(--text-color-dark);
-      padding-top: 70px;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      min-height: 100vh;
-    }
-    body.dark-mode {
-      background-color: var(--background-dark);
-      color: var(--text-color-light);
-    }
+  /* Dark theme colors */
+  --primary-color-dark: #D4B483;
+  --primary-color-hover-dark: #BBA15D;
+  --text-color-light: #E6E1D3;
+  --background-dark: #1B263B;
+  --card-bg-dark: #2A3A62;
+  --shadow-color-dark: rgba(212, 180, 131, 0.6);
+  --btn-bg-dark: #B38B47;
+  --btn-hover-bg-dark: #8A6B32;
+  --modal-bg-dark: #2A3A62;
 
-    h1 {
-      color: var(--primary-color);
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 2rem;
-      transition: color 0.3s ease;
-    }
-    body.dark-mode h1 {
-      color: var(--primary-color-dark);
-    }
+  /* Danger colors dark mode */
+  --danger-color-dark: #D25A5A;
+  --danger-hover-dark: #A44242;
+}
 
-    .btn-primary {
-      background-color: var(--btn-bg-light);
-      border: none;
-      transition: background-color 0.3s ease;
-      color: var(--background-light);
-    }
-    .btn-primary:hover {
-      background-color: var(--btn-hover-bg-light);
-    }
-    body.dark-mode .btn-primary {
-      background-color: var(--btn-bg-dark);
-      color: var(--background-dark);
-    }
-    body.dark-mode .btn-primary:hover {
-      background-color: var(--btn-hover-bg-dark);
-    }
+body {
+  font-family: 'Roboto Slab', serif;
+  background-color: var(--background-light);
+  color: var(--text-color-dark);
+  padding-top: 70px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+body.dark-mode {
+  background-color: var(--background-dark);
+  color: var(--text-color-light);
+}
 
-    .btn-outline-primary {
-      color: var(--btn-bg-light);
-      border-color: var(--btn-bg-light);
-      transition: color 0.3s ease, border-color 0.3s ease;
-    }
-    .btn-outline-primary:hover {
-      background-color: var(--btn-bg-light);
-      color: var(--background-light);
-    }
-    body.dark-mode .btn-outline-primary {
-      color: var(--btn-bg-dark);
-      border-color: var(--btn-bg-dark);
-    }
-    body.dark-mode .btn-outline-primary:hover {
-      background-color: var(--btn-bg-dark);
-      color: var(--background-dark);
-    }
+h1 {
+  color: var(--primary-color);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  transition: color 0.3s ease;
+}
+body.dark-mode h1 {
+  color: var(--primary-color-dark);
+}
 
-    .form-control {
-      border-radius: 0.5rem;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      background-color: var(--background-light);
-      color: var(--text-color-dark);
-      border: 1px solid var(--btn-bg-light);
-    }
-    .form-control::placeholder {
-      color: var(--btn-bg-light);
-    }
-    body.dark-mode .form-control {
-      background-color: var(--card-bg-dark);
-      color: var(--text-color-light);
-      border: 1px solid var(--btn-bg-dark);
-    }
-    body.dark-mode .form-control::placeholder {
-      color: var(--btn-bg-dark);
-    }
+/* Button Styles */
+.btn-primary, .btn-success {
+  background-color: var(--btn-bg-light) !important;
+  color: var(--background-light) !important;
+  border: none !important;
+  transition: background-color 0.3s ease;
+}
+.btn-primary:hover, .btn-success:hover {
+  background-color: var(--btn-hover-bg-light) !important;
+  color: var(--background-light) !important;
+}
+body.dark-mode .btn-primary, body.dark-mode .btn-success {
+  background-color: var(--btn-bg-dark) !important;
+  color: var(--background-dark) !important;
+}
+body.dark-mode .btn-primary:hover, body.dark-mode .btn-success:hover {
+  background-color: var(--btn-hover-bg-dark) !important;
+  color: var(--background-dark) !important;
+}
 
-    .card {
-      background-color: var(--card-bg-light);
-      box-shadow: 0 4px 15px var(--shadow-color-light);
-      border-radius: 1rem;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      color: inherit;
-    }
-    .card:hover {
-      box-shadow: 0 6px 20px var(--primary-color);
-      color: var(--primary-color);
-      cursor: pointer;
-    }
-    body.dark-mode .card {
-      background-color: var(--card-bg-dark);
-      box-shadow: 0 4px 15px var(--shadow-color-dark);
-    }
-    body.dark-mode .card:hover {
-      box-shadow: 0 6px 20px var(--primary-color-dark);
-      color: var(--primary-color-dark);
-      cursor: pointer;
-    }
+/* Danger button */
+.btn-danger {
+  background-color: var(--danger-color-light) !important;
+  color: var(--background-light) !important;
+  border: none !important;
+  transition: background-color 0.3s ease;
+}
+.btn-danger:hover {
+  background-color: var(--danger-hover-light) !important;
+  color: var(--background-light) !important;
+}
+body.dark-mode .btn-danger {
+  background-color: var(--danger-color-dark) !important;
+  color: var(--background-dark) !important;
+}
+body.dark-mode .btn-danger:hover {
+  background-color: var(--danger-hover-dark) !important;
+  color: var(--background-dark) !important;
+}
 
-    /* Modal styling */
-    .modal-content {
-      background-color: var(--modal-bg-light);
-      border-radius: 1rem;
-      transition: background-color 0.3s ease;
-      color: var(--text-color-dark);
-    }
-    body.dark-mode .modal-content {
-      background-color: var(--modal-bg-dark);
-      color: var(--text-color-light);
-    }
+.btn-outline-primary {
+  color: var(--btn-bg-light);
+  border-color: var(--btn-bg-light);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+.btn-outline-primary:hover {
+  background-color: var(--btn-bg-light);
+  color: var(--background-light);
+}
+body.dark-mode .btn-outline-primary {
+  color: var(--btn-bg-dark);
+  border-color: var(--btn-bg-dark);
+}
+body.dark-mode .btn-outline-primary:hover {
+  background-color: var(--btn-bg-dark);
+  color: var(--background-dark);
+}
 
-    /* Modal header */
-    .modal-header {
-      border-bottom: none;
-    }
+.form-control {
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--background-light);
+  color: var(--text-color-dark);
+  border: 1px solid var(--btn-bg-light);
+}
+.form-control::placeholder {
+  color: var(--btn-bg-light);
+}
+body.dark-mode .form-control {
+  background-color: var(--card-bg-dark);
+  color: var(--text-color-light);
+  border: 1px solid var(--btn-bg-dark);
+}
+body.dark-mode .form-control::placeholder {
+  color: var(--btn-bg-dark);
+}
 
-    /* Modal title */
-    .modal-title {
-      color: var(--primary-color);
-      transition: color 0.3s ease;
-    }
-    body.dark-mode .modal-title {
-      color: var(--primary-color-dark);
-    }
+.card {
+  background-color: var(--card-bg-light);
+  box-shadow: 0 4px 15px var(--shadow-color-light);
+  border-radius: 1rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  color: inherit;
+}
+.card:hover {
+  box-shadow: 0 6px 20px var(--primary-color);
+  color: var(--primary-color);
+  cursor: pointer;
+}
+body.dark-mode .card {
+  background-color: var(--card-bg-dark);
+  box-shadow: 0 4px 15px var(--shadow-color-dark);
+}
+body.dark-mode .card:hover {
+  box-shadow: 0 6px 20px var(--primary-color-dark);
+  color: var(--primary-color-dark);
+  cursor: pointer;
+}
 
-    /* Modal buttons */
-    .btn-secondary {
-      background-color: #777;
-      border: none;
-      transition: background-color 0.3s ease;
-      color: white;
-    }
-    .btn-secondary:hover {
-      background-color: #555;
-    }
-    body.dark-mode .btn-secondary {
-      background-color: #444;
-    }
-    body.dark-mode .btn-secondary:hover {
-      background-color: #222;
-    }
+/* Modal styling */
+.modal-content {
+  background-color: var(--modal-bg-light);
+  border-radius: 1rem;
+  transition: background-color 0.3s ease;
+  color: var(--text-color-dark);
+}
+body.dark-mode .modal-content {
+  background-color: var(--modal-bg-dark);
+  color: var(--text-color-light);
+}
 
-    /* Alert message */
-    .alert-danger {
-      max-width: 600px;
-      margin: 1rem auto;
-      border-radius: 0.5rem;
-      background-color: #f8d7da;
-      color: #842029;
-    }
-    body.dark-mode .alert-danger {
-      background-color: #742a2a;
-      color: #f8d7da;
-    }
+/* Modal header */
+.modal-header {
+  border-bottom: none;
+}
 
-    /* Link styling inside cards */
-    .card a {
-      text-decoration: none;
-      color: inherit;
-      transition: color 0.3s ease;
-    }
-    .card a:hover {
-      color: var(--primary-color);
-    }
-    body.dark-mode .card a:hover {
-      color: var(--primary-color-dark);
-    }
+/* Modal title */
+.modal-title {
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+}
+body.dark-mode .modal-title {
+  color: var(--primary-color-dark);
+}
 
-    /* Dark mode toggle button */
-    #darkModeToggle {
-      position: fixed;
-      bottom: 1rem;
-      right: 1rem;
-      z-index: 1050;
-      background-color: var(--btn-bg-light);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      font-size: 1.5rem;
-      box-shadow: 0 0 10px var(--btn-bg-light);
-      cursor: pointer;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    #darkModeToggle:hover {
-      background-color: var(--btn-hover-bg-light);
-      box-shadow: 0 0 15px var(--btn-hover-bg-light);
-    }
-    body.dark-mode #darkModeToggle {
-      background-color: var(--btn-bg-dark);
-      box-shadow: 0 0 10px var(--btn-bg-dark);
-    }
-    body.dark-mode #darkModeToggle:hover {
-      background-color: var(--btn-hover-bg-dark);
-      box-shadow: 0 0 15px var(--btn-hover-bg-dark);
-    }
+/* Modal buttons */
+.btn-secondary {
+  background-color: #777;
+  border: none;
+  transition: background-color 0.3s ease;
+  color: white;
+}
+.btn-secondary:hover {
+  background-color: #555;
+}
+body.dark-mode .btn-secondary {
+  background-color: #444;
+}
+body.dark-mode .btn-secondary:hover {
+  background-color: #222;
+}
+
+/* Alert message */
+.alert-danger {
+  max-width: 600px;
+  margin: 1rem auto;
+  border-radius: 0.5rem;
+  background-color: #f8d7da;
+  color: #842029;
+}
+body.dark-mode .alert-danger {
+  background-color: #742a2a;
+  color: #f8d7da;
+}
+
+/* Link styling inside cards */
+.card a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+.card a:hover {
+  color: var(--primary-color);
+}
+body.dark-mode .card a:hover {
+  color: var(--primary-color-dark);
+}
+
+/* Dark mode toggle button */
+#darkModeToggle {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 1050;
+  background-color: var(--btn-bg-light);
+  color: var(--background-light);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.5rem;
+  box-shadow: 0 0 10px var(--btn-bg-light);
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+#darkModeToggle:hover {
+  background-color: var(--btn-hover-bg-light);
+  box-shadow: 0 0 15px var(--btn-hover-bg-light);
+}
+body.dark-mode #darkModeToggle {
+  background-color: var(--btn-bg-dark);
+  box-shadow: 0 0 10px var(--btn-bg-dark);
+}
+body.dark-mode #darkModeToggle:hover {
+  background-color: var(--btn-hover-bg-dark);
+  box-shadow: 0 0 15px var(--btn-hover-bg-dark);
+}
   </style>
 </head>
 <body>
@@ -417,7 +448,7 @@ if ($result && $result->num_rows > 0) {
                   >Update Quantity</button>
                   <form method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this book?');">
                     <input type="hidden" name="book_id" value="<?= $book['book_id'] ?>" />
-                    <button type="submit" name="delete_book" class="btn btn-secondary btn-sm">Delete</button>
+                    <button type="submit" name="delete_book" class="btn btn-danger btn-sm">Delete</button>
                   </form>
                 </div>
               </div>
@@ -444,8 +475,8 @@ if ($result && $result->num_rows > 0) {
                         <label for="new_quantity_<?= $book['book_id'] ?>" class="form-label">New Quantity</label>
                         <input
                           type="number"
-                          id="new_quantity_<?= $book['book_id'] ?>"
                           name="new_quantity"
+                          id="new_quantity_<?= $book['book_id'] ?>"
                           class="form-control"
                           min="0"
                           value="<?= (int)$book['warehouse_stock'] ?>"
@@ -455,13 +486,12 @@ if ($result && $result->num_rows > 0) {
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                      <button type="submit" name="update_quantity" class="btn btn-primary">Update</button>
+                      <button type="submit" name="update_quantity" class="btn btn-primary">Update Quantity</button>
                     </div>
                   </form>
                 </div>
               </div>
             </div>
-
           </div>
         <?php endforeach; ?>
       <?php else: ?>
@@ -470,37 +500,37 @@ if ($result && $result->num_rows > 0) {
     </div>
   </div>
 
-  <footer class="text-center mt-5">
-  <p>&copy; <?= date('Y'); ?> Inkventory. All rights reserved.</p>
+  <footer class="text-center py-3" style="color: var(--text-color-dark);">
+    &copy; <?= date('Y') ?> Inkventory
+  </footer>
 
-  <!-- Dark mode toggle button -->
-  <button id="darkModeToggle" aria-label="Toggle dark/light mode" title="Toggle Dark/Light Mode">
+  <!-- Dark Mode Toggle Button -->
+  <button id="darkModeToggle" aria-label="Toggle dark mode">
     <i class="bi bi-brightness-high-fill"></i>
   </button>
 
-  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
   <script>
-    const toggle = document.getElementById('darkModeToggle');
-    const icon = toggle.querySelector('i');
+    // Dark mode toggle logic
+    const toggleBtn = document.getElementById('darkModeToggle');
+    const body = document.body;
+    const icon = toggleBtn.querySelector('i');
 
-    function updateIcon(isLight) {
-      icon.className = isLight ? 'bi bi-moon-fill' : 'bi bi-brightness-high-fill';
+    // Load dark mode preference from localStorage
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      body.classList.add('dark-mode');
+      icon.className = 'bi bi-moon-fill';
     }
 
-    if (localStorage.getItem('theme') === 'dark') {
-      document.body.classList.add('dark-mode');
-      updateIcon(false);
-    } else {
-      updateIcon(true);
-    }
-
-    toggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      const isLight = !document.body.classList.contains('dark-mode');
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
-      updateIcon(isLight);
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      if (body.classList.contains('dark-mode')) {
+        icon.className = 'bi bi-moon-fill';
+        localStorage.setItem('darkMode', 'enabled');
+      } else {
+        icon.className = 'bi bi-brightness-high-fill';
+        localStorage.setItem('darkMode', 'disabled');
+      }
     });
   </script>
 </body>
